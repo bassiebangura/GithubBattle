@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./index.css";
 import Popular from "./components/Popular";
-import Battle from "./components/battle";
-import Nav from "./components/nav";
+import Battle from "./components/Battle";
+import Results from "./components/Results";
+import NoMatch from "./components/NoMatch";
+import Nav from "./components/Nav";
 import { ThemeProvider } from "./contexts/theme";
-
 
 class App extends Component {
 	constructor(props) {
@@ -27,10 +28,12 @@ class App extends Component {
 					<div className={this.state.theme}>
 						<div className="container">
 							<Nav />
-                            <Route exact path='/' component={Popular}/>
-                            <Route path='/battle' component={Battle} />
-							{/* <Battle /> */}
-						
+							<Switch>
+								<Route exact path="/" component={Popular} />
+								<Route exact path="/battle" component={Battle} />
+								<Route path="battle/results" component={Results} />
+								<Route component={NoMatch} />
+							</Switch>
 						</div>
 					</div>
 				</ThemeProvider>
