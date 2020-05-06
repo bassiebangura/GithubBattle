@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import "./index.css";
 import Popular from "./components/Popular";
 import Battle from "./components/battle";
 import Nav from "./components/nav";
 import { ThemeProvider } from "./contexts/theme";
+
 
 class App extends Component {
 	constructor(props) {
@@ -20,15 +22,19 @@ class App extends Component {
 	}
 	render() {
 		return (
-			<ThemeProvider value={this.state}>
-				<div className={this.state.theme}> 
-					<div className="container">
-						<Nav />
-						{/* <Battle /> */}
-						<Popular />
+			<Router>
+				<ThemeProvider value={this.state}>
+					<div className={this.state.theme}>
+						<div className="container">
+							<Nav />
+                            <Route exact path='/' component={Popular}/>
+                            <Route path='/battle' component={Battle} />
+							{/* <Battle /> */}
+						
+						</div>
 					</div>
-				</div>
-			</ThemeProvider>
+				</ThemeProvider>
+			</Router>
 		);
 	}
 }
