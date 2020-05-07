@@ -10,9 +10,8 @@ import Nav from "./components/Nav";
 import { ThemeProvider } from "./contexts/theme";
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
+	
+		state = {
 			theme: "light",
 			toggleTheme: () => {
 				this.setState(({ theme }) => ({
@@ -20,7 +19,7 @@ class App extends Component {
 				}));
 			}
 		};
-	}
+	
 	render() {
 		return (
 			<Router>
@@ -31,7 +30,7 @@ class App extends Component {
 							<Switch>
 								<Route exact path="/" component={Popular} />
 								<Route exact path="/battle" component={Battle} />
-								<Route path="battle/results" component={Results} />
+								<Route path="/battle/results" component={Results} />
 								<Route component={NoMatch} />
 							</Switch>
 						</div>
