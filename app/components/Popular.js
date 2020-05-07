@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import Loading from "./Loading";
-import WithHover from "./Tooltip";
+import Tooltip from "./Tooltip";
 import PropTypes from "prop-types";
 import { fetchPopularRepos } from "../utils/api.js";
 import {
@@ -58,10 +58,10 @@ function ReposGrid({ repos }) {
 						>
 							<ul className="card-list">
 								<li>
-									<WithHover text="Github Username">
+									<Tooltip text="Github Username">
 										<FaUser color="rgb(255, , 116)" size={22} />
 										<a href={`https://github.com/${login}`}>{login}</a>
-									</WithHover>
+									</Tooltip>
 								</li>
 								<li>
 									<FaStar color="rgb(255,215,0)" size={22} />

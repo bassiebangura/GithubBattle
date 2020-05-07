@@ -3,7 +3,7 @@ import React from "react";
 import { battle } from "../utils/api";
 import Card from "./Card";
 import Loading from "./Loading";
-import WithHover from "./Tooltip";
+import Tooltip from "./Tooltip";
 import { Link } from "react-router-dom";
 import queryString from "query-string";
 import {
@@ -25,17 +25,17 @@ function ProfileList({ profile }) {
 			</li>
 
 			<li>
-				<WithHover text="User's location">
+				<Tooltip text="User's location">
 					<FaCompass color="rgb(144, 115, 255)" size={22} />
 					{profile.location}
-				</WithHover>
+				</Tooltip>
 			</li>
 
 			<li>
-				<WithHover text="User's Company">
+				<Tooltip text="User's Company">
 					<FaBriefcase color="#795548" size={22} />
 					{profile.company}
-				</WithHover>
+				</Tooltip>
 			</li>
 
 			<li>
