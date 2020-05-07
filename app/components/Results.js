@@ -3,8 +3,9 @@ import React from "react";
 import { battle } from "../utils/api";
 import Card from "./Card";
 import Loading from "./Loading";
-import {Link} from 'react-router-dom';
-import queryString from 'query-string';
+import WithHover from "./Tooltip";
+import { Link } from "react-router-dom";
+import queryString from "query-string";
 import {
 	FaCompass,
 	FaBriefcase,
@@ -14,6 +15,7 @@ import {
 	FaUser
 } from "react-icons/fa";
 import PropTypes from "prop-types";
+
 function ProfileList({ profile }) {
 	return (
 		<ul className="card-list">
@@ -21,18 +23,21 @@ function ProfileList({ profile }) {
 				<FaUser color="rgb(239, 115, 115)" size={22} />
 				{profile.name}
 			</li>
-			{profile.location && (
-				<li>
+
+			<li>
+				<WithHover text="User's location">
 					<FaCompass color="rgb(144, 115, 255)" size={22} />
 					{profile.location}
-				</li>
-			)}
-			{profile.company && (
-				<li>
+				</WithHover>
+			</li>
+
+			<li>
+				<WithHover text="User's Company">
 					<FaBriefcase color="#795548" size={22} />
 					{profile.company}
-				</li>
-			)}
+				</WithHover>
+			</li>
+
 			<li>
 				<FaUsers color="rgb(129, 195, 245)" size={22} />
 				{profile.followers.toLocaleString()} followers
@@ -49,17 +54,17 @@ ProfileList.propTypes = {
 	profile: PropTypes.object.isRequired
 };
 export default class Results extends React.Component {
-	
-		state = {
-			winner: null,
-			loser: null,
-			loading: true,
-			error: null
-		};
-	
+	state = {
+		winner: null,
+		loser: null,
+		loading: true,
+		error: null
+	};
+
 	componentDidMount() {
-		
-		const { playerOne, playerTwo } = queryString.parse(this.props.location.search);
+		const { playerOne, playerTwo } = queryString.parse(
+			this.props.location.search
+		);
 
 		battle([playerOne, playerTwo])
 			.then(players => {
@@ -81,7 +86,7 @@ export default class Results extends React.Component {
 		const { winner, loser, loading, error } = this.state;
 
 		if (loading === true) {
-			return <Loading text='Battle Is On'/>;
+			return <Loading text="Battle Is On" />;
 		}
 
 		if (error) {
@@ -110,9 +115,7 @@ export default class Results extends React.Component {
 						<ProfileList profile={loser.profile} />
 					</Card>
 				</div>
-				<Link 
-				to='/battle'
-				className="btn dark-btn btn-space">
+				<Link to="/battle" className="btn dark-btn btn-space">
 					Reset
 				</Link>
 			</React.Fragment>

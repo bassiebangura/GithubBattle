@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
-import Loading from './Loading'
+import Loading from "./Loading";
+import WithHover from "./Tooltip";
 import PropTypes from "prop-types";
 import { fetchPopularRepos } from "../utils/api.js";
 import {
@@ -57,8 +58,10 @@ function ReposGrid({ repos }) {
 						>
 							<ul className="card-list">
 								<li>
-									<FaUser color="rgb(255, , 116)" size={22} />
-									<a href={`https://github.com/${login}`}>{login}</a>
+									<WithHover text="Github Username">
+										<FaUser color="rgb(255, , 116)" size={22} />
+										<a href={`https://github.com/${login}`}>{login}</a>
+									</WithHover>
 								</li>
 								<li>
 									<FaStar color="rgb(255,215,0)" size={22} />
@@ -85,18 +88,17 @@ ReposGrid.propTypes = {
 	repos: PropTypes.array.isRequired
 };
 export default class Popular extends React.Component {
-	
-		state = {
-			selectedLanguage: "All",
-			error: null,
-			repos: {}
-		};
-	
+	state = {
+		selectedLanguage: "All",
+		error: null,
+		repos: {}
+	};
+
 	componentDidMount() {
 		this.updateLanguage(this.state.selectedLanguage);
 	}
 
-	updateLanguage = (selectedLanguage) => {
+	updateLanguage = selectedLanguage => {
 		this.setState({
 			selectedLanguage,
 			error: null
@@ -120,12 +122,12 @@ export default class Popular extends React.Component {
 					});
 				});
 		}
-	}
+	};
 
 	isLoading = () => {
 		const { selectedLanguage, repos, error } = this.state;
-		return (!repos[selectedLanguage] && error === null);
-	}
+		return !repos[selectedLanguage] && error === null;
+	};
 
 	render() {
 		const { selectedLanguage, repos, error } = this.state;
@@ -135,7 +137,7 @@ export default class Popular extends React.Component {
 					selected={selectedLanguage}
 					onUpdateLanguage={this.updateLanguage}
 				/>
-				{this.isLoading() && <Loading text='Fetching Repos'/>}
+				{this.isLoading() && <Loading text="Fetching Repos" />}
 				{error && <p className="error center-text">{error}</p>}
 				{repos[selectedLanguage] && (
 					<ReposGrid repos={repos[selectedLanguage]} />
