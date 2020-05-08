@@ -2,7 +2,7 @@ import React from "react";
 
 
 //HOC method implementation of sharing logic
-export default function withHover(Component, propName = "hovering") {
+export function withHover(Component, propName = "hovering") {
 	return class WithHover extends React.Component {
 		constructor(props) {
 			super(props);
@@ -37,7 +37,8 @@ export default function withHover(Component, propName = "hovering") {
 }
 
 //render children method implementation of sharing logic
-export class Hover extends React.Component {
+//This is the one being used currently
+export default class Hover extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
