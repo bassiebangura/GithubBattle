@@ -11,16 +11,16 @@ const styles = {
 		textAlign: "center"
 	}
 };
-export default function Loading({ text = "Loading", speed = 3000 }) {
+export default function Loading({ text = "Loading", speed = 300 }) {
 	const [content, setContent] = useState(text);
 
 	useEffect(() => {
 		const id = window.setInterval(
-			() => setContent(content === `${text}...` ? content : `${text}.`),
+			() => setContent(content => (content === `${text}...` ? text : `${content}.`)),
 			speed
 		);
 
-		return () => window.clearInterval(id);
+		return (() => window.clearInterval(id));
 	}, [text, speed]);
 	return <p style={styles.content}>{content}</p>;
 }
